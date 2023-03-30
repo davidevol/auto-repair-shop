@@ -10,7 +10,4 @@ app.use(express.json({ limit: '1.5MB' }));
 
 app.use(defaultRouter);
 
-const port = 3000;
-app.listen(port);
-
 export default app;

@@ -1,6 +1,6 @@
 ## Description
 
-...
+this is a partial deliverable from my week 16 project, it contains the ability to create a client and see it
 
 ## Installation
 
@@ -8,7 +8,26 @@
 $ npm install
 ```
 
-## Running the app
+### create an .env file like this
+
+```bash
+PORT=3000
+
+POSTGRES_HOST=localhost
+POSTGRES_PASSWORD=pass
+POSTGRES_USER=postgres
+POSTGRES_DB=postgres
+POSTGRES_PORT=5432
+```
+
+### import postman collection to test
+
+```bash
+In a workspace, Import the file AUTO-REPAIR-SHOP.postman_collection.json, which contains the basic queries for testing the api.
+```
+
+## run the app
+
 
 ```bash
 # development

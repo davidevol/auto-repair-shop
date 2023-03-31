@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "0bde9b67-7b06-47a7-bf97-de30ec3acbb3",
+		"name": "AUTO-REPAIR-SHOP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21067929"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Validation Test",
+					"item": [
+						{
+							"name": "client_type will generate an error",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"John Doe\",\r\n\t\"cpf_cnpj\": \"12345678901\",\r\n\t\"client_type\": \"P\",\r\n\t\"birthday\": \"1990-01-01\",\r\n\t\"phone\": \"555-1234\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"123\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "New Client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"John Doe\",\r\n\t\"cpf_cnpj\": \"12345678901\",\r\n\t\"client_type\": \"PJ\",\r\n\t\"birthday\": \"1990-01-01\",\r\n\t\"phone\": \"555-1234\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"123\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/clients/032b3f9d-dd72-4875-8875-cc96b7b5dd2b",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"032b3f9d-dd72-4875-8875-cc96b7b5dd2b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

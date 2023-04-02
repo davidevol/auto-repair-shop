@@ -29,6 +29,14 @@ router.patch('/:id', async (req, res) => {
   return res.send(response);
 });
 
+router.delete('/:id', async (req, res) => {
+  const controller = new ClientController();
+  const response = await controller.deleteClient(req.params.id);
+  return !response
+    ? res.status(404).send({ message: 'No user found' })
+    : res.status(200).send({ message: 'User deleted successfully' });
+});
+
 // TODO
 
 router.get(':id/cars'); // get all cars

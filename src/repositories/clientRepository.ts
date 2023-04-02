@@ -106,3 +106,10 @@ export const updateClient = async (
 
   return client;
 };
+
+export const deleteClient = async (id: string): Promise<boolean> => {
+  const client = await getClient(id);
+  if (!client) return false;
+  await clientRepository.delete(client.id);
+  return true;
+};

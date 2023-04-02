@@ -1,10 +1,11 @@
-import { Get, Route, Post, Body, Path } from 'tsoa';
+import { Get, Route, Post, Body, Path, Patch, Delete } from 'tsoa';
 
 import {
   getClients,
   createClients,
   getClient,
   updateClient,
+  deleteClient,
   IClientRequestEntity,
   IClientResponseEntity,
 } from '../repositories/clientRepository';
@@ -31,11 +32,18 @@ export default class ClientController {
     return getClient(id);
   }
 
-  @Get('/:id')
+  @Patch('/:id')
   public async updateClient(
     @Path() id: string,
     @Body() body: IClientResponseEntity,
   ): Promise<IClientResponseEntity | null> {
     return updateClient(id, body);
+  }
+
+  @Delete('/:id')
+  public async deleteClient(
+    @Path() id: string,
+  ): Promise<IClientResponseEntity | boolean> {
+    return deleteClient(id);
   }
 }

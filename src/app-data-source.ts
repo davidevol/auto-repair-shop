@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import 'reflect-metadata';
 import dotenv from 'dotenv';
 import { ClientRequestEntity } from './entity/client/clientRequestEntity';
+import { ClientResponseEntity } from './entity/client/clientResponseEntity';
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const PostgresDataSource = new DataSource({
   password: process.env.POSTGRES_PASSWORD || 'postgres',
   database: process.env.POSTGRES_DB || 'postgres',
   // entities: [__dirname + '/entity/*{.js,.ts}'], didn't work =(
-  entities: [ClientRequestEntity],
+  entities: [ClientResponseEntity, ClientRequestEntity],
   synchronize: true,
 });
 

@@ -22,9 +22,14 @@ router.get('/:id', async (req, res) => {
   return res.send(response);
 });
 
-// TODO
+router.patch('/:id', async (req, res) => {
+  const controller = new ClientController();
+  const response = await controller.updateClient(req.params.id, req.body);
+  if (!response) res.status(404).send({ message: 'No user found' });
+  return res.send(response);
+});
 
-router.patch('/'); // updade clients
+// TODO
 
 router.get(':id/cars'); // get all cars
 router.post(':id/cars'); // add client car

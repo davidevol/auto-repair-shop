@@ -3,15 +3,17 @@ import { Get, Route, Post, Body, Path } from 'tsoa';
 import {
   getClients,
   createClients,
-  IClientRequestEntity,
   getClient,
+  updateClient,
+  IClientRequestEntity,
+  IClientResponseEntity,
 } from '../repositories/clientRepository';
 import { ClientRequestEntity } from '../entity/client/clientRequestEntity';
 
 @Route('clients')
 export default class ClientController {
   @Get('/')
-  public async getClients(): Promise<Array<ClientRequestEntity>> {
+  public async getClients(): Promise<Array<IClientResponseEntity>> {
     return getClients();
   }
 
@@ -25,7 +27,15 @@ export default class ClientController {
   @Get('/:id')
   public async getClient(
     @Path() id: string,
-  ): Promise<ClientRequestEntity | null> {
-    return getClient(String(id));
+  ): Promise<IClientResponseEntity | null> {
+    return getClient(id);
+  }
+
+  @Get('/:id')
+  public async updateClient(
+    @Path() id: string,
+    @Body() body: IClientResponseEntity,
+  ): Promise<IClientResponseEntity | null> {
+    return updateClient(id, body);
   }
 }

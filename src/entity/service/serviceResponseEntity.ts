@@ -1,9 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { ServicePartRequest } from './servicePartRequestEntity';
 
 @Entity()
 export class ServiceResponseEntity {
-  @Column()
+  @PrimaryColumn()
   id!: number;
 
   @Column()

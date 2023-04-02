@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
 import { MechanicListResponseEntity } from './mechanicListResponseEntity';
 
 enum MechanicStatus {
@@ -10,7 +10,7 @@ enum MechanicStatus {
 
 @Entity()
 export class MechanicResponseEntity {
-  @Column()
+  @PrimaryColumn()
   id!: number;
 
   @Column()

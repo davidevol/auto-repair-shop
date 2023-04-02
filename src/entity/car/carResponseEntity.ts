@@ -1,9 +1,9 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
 import { ClientResponseWithCarsEntity } from '../client/clientResponseWithCars';
 
 @Entity()
 export class CarResponseEntity {
-  @Column()
+  @PrimaryColumn()
   id!: string;
 
   @Column()

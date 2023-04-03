@@ -1,4 +1,4 @@
-import { Get, Route, Post, Body, Path, Patch, Delete } from 'tsoa';
+import { Get, Route, Post, Body, Path, Patch, Delete, Query } from 'tsoa';
 
 import {
   getClients,
@@ -8,14 +8,18 @@ import {
   deleteClient,
   IClientRequestEntity,
   IClientResponseEntity,
+  IClientListResponseEntity,
 } from '../repositories/clientRepository';
 import { ClientRequestEntity } from '../entity/client/clientRequestEntity';
 
 @Route('clients')
 export default class ClientController {
   @Get('/')
-  public async getClients(): Promise<Array<IClientResponseEntity>> {
-    return getClients();
+  public async getClients(
+    @Query('limit') limit: number | any,
+    @Query('offset') offset: number | any,
+  ): Promise<Array<IClientListResponseEntity | any>> {
+    return getClients(limit, offset);
   }
 
   @Post('/')

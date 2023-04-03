@@ -3,9 +3,11 @@ import ClientController from '../controllers/clientController';
 
 const router = express.Router();
 
-router.get('/', async (_req, res) => {
+router.get('/', async (req, res) => {
+  const limit = req.query.limit;
+  const offset = req.query.offset;
   const controller = new ClientController();
-  const response = await controller.getClients();
+  const response = await controller.getClients(limit, offset);
   return res.send(response);
 });
 

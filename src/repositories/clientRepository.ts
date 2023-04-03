@@ -3,6 +3,7 @@ import {
   ClientRequestEntity,
   ClientType,
 } from '../entity/client/clientRequestEntity';
+import { ClientResponseWithCarsEntity } from '../entity/client/clientResponseWithCars';
 
 export interface IClientRequestEntity {
   id: string;
@@ -35,6 +36,13 @@ export interface IClientResponseEntity {
   city: string;
 }
 
+export interface IClientListResponseEntity {
+  limit: number;
+  offset: number;
+  total: number;
+  items: ClientResponseWithCarsEntity[];
+}
+
 const clientRepository =
   PostgresDataSource.manager.getRepository(ClientRequestEntity);
 
@@ -62,22 +70,40 @@ export const getClient = async (
   return clientResponse;
 };
 
-export const getClients = async (): Promise<Array<IClientResponseEntity>> => {
-  const clients = await clientRepository.find();
-  return clients.map((client) => ({
-    id: client.id,
-    name: client.name,
-    email: client.email,
-    phone: client.phone,
-    cpf_cnpj: client.cpf_cnpj,
-    client_type: client.client_type,
-    birthday: client.birthday,
-    zipCode: client.zipCode,
-    street: client.street,
-    number: client.number,
-    neighbourhood: client.neighbourhood,
-    city: client.city,
-  }));
+export const getClients = async (
+  limit?: number | any,
+  offset?: number | any,
+): Promise<IClientListResponseEntity | any> => {
+  const [clients, total] = await clientRepository.findAndCount({
+    take: limit,
+    skip: offset,
+  });
+
+  const clientResponseList = clients.map((client) => {
+    return {
+      id: client.id,
+      name: client.name,
+      email: client.email,
+      phone: client.phone,
+      cpf_cnpj: client.cpf_cnpj,
+      client_type: client.client_type,
+      birthday: client.birthday,
+      zipCode: client.zipCode,
+      street: client.street,
+      number: client.number,
+      neighbourhood: client.neighbourhood,
+      city: client.city,
+    };
+  });
+
+  const clientListResponse = {
+    limit,
+    offset,
+    total,
+    items: clientResponseList,
+  };
+
+  return clientListResponse;
 };
 
 export const createClients = async (

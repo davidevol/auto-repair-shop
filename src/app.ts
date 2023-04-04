@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import bodyParser from 'body-parser';
 import defaultRouter from './routes/defaultRouter';
 import { catchNonApiRoutes } from './routes/catchNonApiRoutes';
-import { AppErrorHandler } from './app-error-handler';
+import { AppErrorHandler } from './utils/app-error-handler';
 
 const app: Application = express();
 

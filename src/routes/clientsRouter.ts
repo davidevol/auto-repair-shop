@@ -4,8 +4,8 @@ import { QueryFailedError } from 'typeorm';
 import {
   ValidationErrorResponse,
   validationErrorHandler,
-} from '../app-validation-error';
-import { AppError } from '../app-error';
+} from '../utils/app-validation-error';
+import { AppError } from '../utils/app-error';
 
 const router = express.Router();
 

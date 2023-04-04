@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { AppError } from '../app-error';
+import { AppError } from '../utils/app-error';
 
 export const catchNonApiRoutes: RequestHandler = (req, res, next) => {
   const { path } = req;

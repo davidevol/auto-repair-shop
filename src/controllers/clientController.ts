@@ -10,7 +10,7 @@ import {
   IClientResponseEntity,
   IClientListResponseEntity,
 } from '../repositories/clientRepository';
-import { ClientRequestEntity } from '../entity/client/clientRequestEntity';
+import { ClientRequestEntity } from '../entities/client/clientRequestEntity';
 
 @Route('clients')
 export default class ClientController {

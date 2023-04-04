@@ -2,10 +2,10 @@ import { DataSource } from 'typeorm';
 import 'reflect-metadata';
 import dotenv from 'dotenv';
 
-import { ClientRequestEntity } from './entity/client/clientRequestEntity';
-import { ClientResponseEntity } from './entity/client/clientResponseEntity';
-import { ClientResponseWithCarsEntity } from './entity/client/clientResponseWithCars';
-import { CarResponseEntity } from './entity/car/carResponseEntity';
+import { ClientRequestEntity } from './entities/client/clientRequestEntity';
+import { ClientResponseEntity } from './entities/client/clientResponseEntity';
+import { ClientResponseWithCarsEntity } from './entities/client/clientResponseWithCars';
+import { CarResponseEntity } from './entities/car/carResponseEntity';
 
 dotenv.config();
 

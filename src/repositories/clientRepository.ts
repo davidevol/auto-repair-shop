@@ -2,8 +2,8 @@ import PostgresDataSource from '../app-data-source';
 import {
   ClientRequestEntity,
   ClientType,
-} from '../entity/client/clientRequestEntity';
-import { ClientResponseWithCarsEntity } from '../entity/client/clientResponseWithCars';
+} from '../entities/client/clientRequestEntity';
+import { ClientResponseWithCarsEntity } from '../entities/client/clientResponseWithCars';
 
 export interface IClientRequestEntity {
   id: string;

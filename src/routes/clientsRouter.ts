@@ -9,19 +9,6 @@ import { AppError } from '../utils/app-error';
 
 const router = express.Router();
 
-router.use(
-  (
-    err: ValidationErrorResponse,
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    err instanceof QueryFailedError
-      ? validationErrorHandler(err, req, res, next)
-      : next(new AppError(500, 'Internal server error', 'error'));
-  },
-);
-
 router.get('/', async (req: Request, res: Response) => {
   const limit = req.query.limit;
   const offset = req.query.offset;
@@ -68,6 +55,19 @@ router.delete(
     return !response
       ? next(new AppError(404, `Unknown user ID ${req.params.id}`, 'Not Found'))
       : res.status(204);
+  },
+);
+
+router.use(
+  (
+    err: ValidationErrorResponse,
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    err instanceof QueryFailedError
+      ? validationErrorHandler(err, req, res, next)
+      : next(new AppError(500, 'Internal server error', 'error'));
   },
 );
 

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import app from './app';
 import logger from './utils/logger';
-import PostgresDataSource from './app-data-source';
+import PostgresDataSource from './database/appDataSource';
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;

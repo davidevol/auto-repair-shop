@@ -1,11 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import ClientController from '../controllers/clientController';
-import { QueryFailedError } from 'typeorm';
-import {
-  ValidationErrorResponse,
-  validationErrorHandler,
-} from '../utils/app-validation-error';
-import { AppError } from '../utils/app-error';
+import { AppError } from '../errors/appError';
+import { ClientRequestEntity } from '../entities/client/clientRequestEntity';
+import { validateEntityMiddleware } from '../middlewares/validateEntityMiddleware';
 
 const router = express.Router();
 
@@ -17,16 +14,15 @@ router.get('/', async (req: Request, res: Response) => {
   return res.send(response);
 });
 
-router.post('/', async (req: Request, res: Response, next: NextFunction) => {
-  try {
+router.post(
+  '/',
+  validateEntityMiddleware(ClientRequestEntity),
+  async (req: Request, res: Response) => {
     const controller = new ClientController();
     const response = await controller.createClients(req.body);
     return res.send(response);
-  } catch (err) {
-    err instanceof QueryFailedError;
-    return next(err);
-  }
-});
+  },
+);
 
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   const controller = new ClientController();
@@ -55,19 +51,6 @@ router.delete(
     return !response
       ? next(new AppError(404, `Unknown user ID ${req.params.id}`, 'Not Found'))
       : res.status(204);
-  },
-);
-
-router.use(
-  (
-    err: ValidationErrorResponse,
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    err instanceof QueryFailedError
-      ? validationErrorHandler(err, req, res, next)
-      : next(new AppError(500, 'Internal server error', 'error'));
   },
 );
 

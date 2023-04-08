@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import PostgresDataSource from '../app-data-source';
+import PostgresDataSource from '../database/appDataSource';
 import { ClientRequestEntity } from '../entities/client/clientRequestEntity';
 import jwt from 'jsonwebtoken';
 

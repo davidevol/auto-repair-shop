@@ -2,10 +2,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import { AppError } from '../utils/app-error';
 import AuthController from '../controllers/authController';
 import logger from '../utils/logger';
 import { Credentials } from '../service/authService';
+import { AppError } from '../errors/appError';
 
 dotenv.config();
 

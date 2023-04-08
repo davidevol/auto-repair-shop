@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { AppError } from './app-error';
-import logger from './logger';
+import { AppError } from '../errors/appError';
+import logger from '../utils/logger';
 
 interface ErrorResponse {
   statusCode: number;

@@ -1,4 +1,4 @@
-import PostgresDataSource from '../app-data-source';
+import PostgresDataSource from '../database/appDataSource';
 import {
   ClientRequestEntity,
   ClientType,

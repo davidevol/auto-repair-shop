@@ -2,39 +2,31 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import { ClientRequestEntity } from '../entities/client/clientRequestEntity';
-import PostgresDataSource from '../app-data-source';
-import logger from '../utils/logger';
 import { AppError } from '../utils/app-error';
+import AuthController from '../controllers/authController';
+import logger from '../utils/logger';
+import { Credentials } from '../service/authService';
 
 dotenv.config();
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  const clientRepository =
-    PostgresDataSource.manager.getRepository(ClientRequestEntity);
-  const client = await clientRepository.findOne({ where: { email } });
-
-  if (!client || client.password !== password) {
-    res.status(401).send('Credenciais inválidas');
-    return;
+router.post('/login', async (req, res, next) => {
+  const { email, password } = req.body as Credentials;
+  const authController = new AuthController();
+  const response = await authController.loginClient({ email, password });
+  if (!response) {
+    return next(
+      new AppError(
+        401,
+        'Invalid email or password. Please try again.',
+        'invalid credentials',
+      ),
+    );
   }
-
-  const clientId = { uuid: client.id };
-
-  const secret = process.env.JWT_SECRET!;
-  const expiresIn = {
-    expiresIn: '1h',
-  };
-
-  const token = jwt.sign(clientId, secret, expiresIn);
-  logger.info(token);
-
-  res.setHeader('Authorization', `Bearer ${token}`);
-  res.status(200);
+  logger.info({ response });
+  res.setHeader('Authorization', `Bearer ${response}`);
+  res.status(200).send('Success');
 });
 
 router.post('/refreshToken', async (req, res, next) => {
@@ -62,7 +54,7 @@ router.post('/refreshToken', async (req, res, next) => {
     });
 
     res.setHeader('Authorization', `Bearer ${newToken}`);
-    res.status(200);
+    res.status(200).send('Success');
   } catch (err) {
     return next(
       new AppError(

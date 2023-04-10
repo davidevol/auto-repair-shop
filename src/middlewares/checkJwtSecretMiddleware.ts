@@ -1,9 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../errors/appError';
 
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 export function checkJwtSecretMiddleware(
   req: Request,
   res: Response,

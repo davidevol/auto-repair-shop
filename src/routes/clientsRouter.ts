@@ -54,12 +54,4 @@ router.delete(
   },
 );
 
-// TODO
-
-router.get(':id/cars'); // get all cars
-router.post(':id/cars'); // add client car
-router.patch(':id/cars/:carId'); // update client car
-router.delete(':id/cars/:carId'); // remove client car by id
-router.get(':id/cars/:carId'); // remove client car by id
-
 export default router;

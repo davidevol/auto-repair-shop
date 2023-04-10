@@ -13,7 +13,7 @@
 					"name": "Validation Test",
 					"item": [
 						{
-							"name": "client_type will generate an error",
+							"name": "name with blank field will generate an error",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -25,7 +25,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"name\": \"John Doe\",\r\n\t\"cpf_cnpj\": \"12345678901\",\r\n\t\"client_type\": \"P\",\r\n\t\"birthday\": \"1990-01-01\",\r\n\t\"phone\": \"555-1234\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"123\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
+									"raw": "{\r\n    \"name\": \"\",\r\n\t\"cpf_cnpj\": \"95429234000165\",\r\n\t\"client_type\": \"PJ\",\r\n\t\"birthday\": \"1990-12-31\",\r\n\t\"phone\": \"(95) 98343-7116\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"1A\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -50,23 +50,353 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "This route not exist",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clientss",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clientss"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
-					"name": "New Client",
+					"name": "<<CRUD>>",
+					"item": [
+						{
+							"name": "Create One",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"John Doe\",\r\n\t\"cpf_cnpj\": \"95429234000165\",\r\n\t\"client_type\": \"PJ\",\r\n\t\"birthday\": \"1990-12-31\",\r\n\t\"phone\": \"(95) 98343-7116\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"1A\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update One",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"João Ninguem\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"password\": \"passwordWillNotChange\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients/d9f1c200-003c-49f4-8bf1-f0a6145ccb08",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"d9f1c200-003c-49f4-8bf1-f0a6145ccb08"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get offset & limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients?offset=0&limit=5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get One",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients/d9f1c200-003c-49f4-8bf1-f0a6145ccb08",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"d9f1c200-003c-49f4-8bf1-f0a6145ccb08"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete One",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/clients/d2930c83-160b-48f1-9b9a-14ceb6ea7209",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"d2930c83-160b-48f1-9b9a-14ceb6ea7209"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Extracts the value of the \"Authorization\" header\r",
+											"const accessToken = pm.response.headers.get(\"Authorization\");\r",
+											"\r",
+											"// If the value of the \"Authorization\" header is not null or undefined\r",
+											"if (accessToken) {\r",
+											"// Splits the value by space to get the token only\r",
+											"const token = accessToken.split(\" \")[1];\r",
+											"\r",
+											"// Sets the value of the token in a global variable \"jwt\"\r",
+											"pm.environment.set(\"jwt\", token);\r",
+											"} else {\r",
+											"// If the value of the \"Authorization\" header is null or undefined, sets an empty string as the value of the token in the global variable \"jwt\"\r",
+											"pm.environment.set(\"jwt\", \"\");\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"john.doe2@example.com\",\r\n    \"password\": \"mypassword2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/client/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"client",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"access_token\": \"{{jwt}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:3000/api/v1/client/refreshToken",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"client",
+										"refreshToken"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "Create One",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"John Doe\",\r\n\t\"cpf_cnpj\": \"12345678901\",\r\n\t\"client_type\": \"PJ\",\r\n\t\"birthday\": \"1990-01-01\",\r\n\t\"phone\": \"555-1234\",\r\n\t\"email\": \"john.doe@example.com\",\r\n\t\"password\": \"mypassword\",\r\n\t\"zipCode\": \"12345-678\",\r\n\t\"street\": \"Main Street\",\r\n\t\"number\": \"123\",\r\n\t\"neighbourhood\": \"Downtown\",\r\n\t\"city\": \"New York\"\r\n}",
+							"raw": "{\r\n    \"model\": \"Golf\",\r\n    \"year\": 2022,\r\n    \"manufacturer\": \"Volkswagen\",\r\n    \"color\": \"white\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,55 +404,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/api/v1/clients",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"clients"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/v1/clients",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"clients"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get One",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:3000/api/v1/clients/032b3f9d-dd72-4875-8875-cc96b7b5dd2b",
+							"raw": "http://127.0.0.1:3000/api/v1/clients/d9f1c200-003c-49f4-8bf1-f0a6145ccb08/cars",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -135,7 +417,8 @@
 								"api",
 								"v1",
 								"clients",
-								"032b3f9d-dd72-4875-8875-cc96b7b5dd2b"
+								"d9f1c200-003c-49f4-8bf1-f0a6145ccb08",
+								"cars"
 							]
 						}
 					},

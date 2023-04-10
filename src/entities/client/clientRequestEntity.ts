@@ -2,7 +2,6 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import {
   Length,
   IsEmail,
-  IsAlpha,
   IsEnum,
   IsString,
   IsNotEmpty,
@@ -21,7 +20,7 @@ export class ClientRequestEntity {
 
   @Column()
   @IsNotEmpty({ message: 'The name cannot be empty.' })
-  @IsAlpha(undefined, { message: 'The name can only contain letters.' })
+  @IsString({ message: 'The name can only contain letters.' })
   name!: string;
 
   @Column()

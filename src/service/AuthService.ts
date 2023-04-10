@@ -11,16 +11,21 @@ export interface Credentials {
 export interface AuthResponse {
   accessToken: string;
 }
+
+export interface Token {
+  access_token: string;
+}
+
+export interface NewToken {
+  newToken: string;
+}
+
 export const loginClient = async ({
   email,
   password,
 }: Credentials): Promise<AuthResponse | null> => {
   const clientRepository =
     PostgresDataSource.manager.getRepository(ClientRequestEntity);
-
-  if (!process.env.JWT_SECRET || process.env.JWT_SECRET === '') {
-    return null;
-  }
 
   const client = await clientRepository.findOne({ where: { email } });
 
@@ -34,6 +39,28 @@ export const loginClient = async ({
     expiresIn: '1h',
   };
 
-  const accessToken = jwt.sign(clientId, secret, expiresIn);
+  const accessToken = jwt.sign(clientId, secret!, expiresIn);
   return { accessToken };
+};
+
+export const refreshToken = async ({
+  access_token,
+}: Token): Promise<NewToken | null> => {
+  interface TokenPayload {
+    exp: number;
+    iat: number;
+    uuid: string;
+  }
+
+  const decoded = jwt.verify(
+    access_token,
+    process.env.JWT_SECRET!,
+  ) as TokenPayload;
+  const clientId = decoded.uuid;
+
+  const newToken = jwt.sign({ uuid: clientId }, process.env.JWT_SECRET!, {
+    expiresIn: '2h',
+  });
+
+  return { newToken };
 };

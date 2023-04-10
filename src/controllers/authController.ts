@@ -1,5 +1,12 @@
 import { Body, Post, Route } from 'tsoa';
-import { AuthResponse, Credentials, loginClient } from '../service/authService';
+import {
+  Credentials,
+  AuthResponse,
+  loginClient,
+  NewToken,
+  refreshToken,
+  Token,
+} from '../service/authService';
 
 @Route('client')
 export default class AuthController {
@@ -8,5 +15,9 @@ export default class AuthController {
     @Body() body: Credentials,
   ): Promise<AuthResponse | null> {
     return loginClient(body);
+  }
+  @Post('/')
+  public async refreshToken(@Body() body: Token): Promise<NewToken | null> {
+    return refreshToken(body);
   }
 }
